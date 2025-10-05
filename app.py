@@ -1,10 +1,27 @@
 import streamlit as st
 import pickle
-from nltk.corpus import stopwords
 import string
 import nltk
-nltk.data.path.append('./nltk_data')
+from nltk.corpus import stopwords
 from nltk.stem.porter import PorterStemmer
+
+nltk.data.path.append('./nltk_data')
+
+try:
+    nltk.data.find('tokenizers/punkt')
+except LookupError:
+    nltk.download('punkt', download_dir='./nltk_data')
+
+try:
+    nltk.data.find('tokenizers/punkt_tab')
+except LookupError:
+    nltk.download('punkt_tab', download_dir='./nltk_data')
+
+try:
+    nltk.data.find('corpora/stopwords')
+except LookupError:
+    nltk.download('stopwords', download_dir='./nltk_data')
+
 ps = PorterStemmer()
 
 def transform_text(text):
@@ -57,7 +74,7 @@ if st.button('Predict'):
 
     # 4. Display
     if result == 1:
-        st.header('Message is spam')
+        st.header('🚨 Message is spam')
 
     else:
         st.header('Message is not spam')
