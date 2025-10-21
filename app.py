@@ -62,13 +62,8 @@ if st.button('Predict'):
         # 3. Predict
         result = model.predict(vector_input)[0]
 
-        # 4. Display confidence if available
-        if hasattr(model, "predict_proba"):
-            prob = model.predict_proba(vector_input)[0][1]  # probability of spam
-            st.subheader(f"Confidence: {prob:.2%}")
-
-        # 5. Display result with emoji
+        # 4. Display result with emoji
         if result == 1:
             st.header('🚨 Message is spam')
         else:
-            st.header('✅ Message is not spam')
+            st.header('Message is not spam')
